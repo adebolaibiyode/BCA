@@ -5,10 +5,10 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create Invoice</h1>
+<h1 style="color:blueviolet">Create Invoice</h1>
 
 <h4></h4>
-<hr />
+<hr style="color:orangered" />
 <div class="row">
     <div class="col-md">
         <form method="post">
@@ -17,33 +17,33 @@
                     <div class="col-6">               
                         <div class="form-group">
                             <label asp-for="Invoice.InvoiceType" class="control-label"></label>
-                            <select asp-for="Invoice.InvoiceType" class="form-control">
+                            <select asp-for="Invoice.InvoiceType" tabindex="1" class="form-control">
                                 <option value="SI">Sales Invoice</option>
                                 <option value="PI">Purchase Invoice</option>
                             </select>
                             <span asp-validation-for="Invoice.InvoiceType" class="text-danger"></span>
                         </div>                      
                         <div class="form-group">
-                            <label asp-for="Invoice.InvoiceNumber" class="control-label"></label>
-                            <input  value=@Model.Invoice.InvoiceNumber disabled ="disabled" class="form-control" />
+                            <label asp-for="Invoice.InvoiceNumber"  class="control-label"></label>
+                        <input value=@Model.Invoice.InvoiceNumber tabindex="3" disabled="disabled" class="form-control" />
                             <input asp-for="Invoice.InvoiceNumber" value=@Model.Invoice.InvoiceNumber type="hidden" />
                             <span asp-validation-for="Invoice.InvoiceNumber" class="text-danger"></span>
                         </div>
-                    <hr style="color:aqua" />
+                    <hr style="color:orangered" />
                         <div class="form-group">
-                            <label asp-for="Invoice.AccountType" class="control-label" style="display: inline;">Account Type: </label>
+                            <label asp-for="Invoice.AccountType" tabindex="5" class="control-label" style="display: inline;">Account Type: </label>
                             <p id="accountTypeLabel" style="display: inline;">Customer</p>
                             <input asp-for="Invoice.AccountType" type="hidden" class="form-control" />
                             <span asp-validation-for="Invoice.AccountType" class="text-danger"></span>
                         </div>
-                    <hr style="color:aqua" />
+                    <hr style="color:orangered" />
                     <div class="form-group">
-                        <label asp-for="Invoice.AccountName" class="control-label"></label>
-                        <input asp-for="Invoice.AccountName" class="form-control" />
+                        <label asp-for="Invoice.AccountName"  class="control-label"></label>
+                        <input asp-for="Invoice.AccountName" tabindex="7" class="form-control" />
                         <span asp-validation-for="Invoice.AccountName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Invoice.AccountReference" class="control-label" style="display: inline;">Reference: </label>
+                        <label asp-for="Invoice.AccountReference" tabindex="9" class="control-label" style="display: inline;">Reference: </label>
                         <p id="accountRef" style="display: inline;"></p>
                         <input asp-for="Invoice.AccountReference" type="hidden" class="form-control" />
                         <span asp-validation-for="Invoice.AccountReference" class="text-danger"></span>
@@ -52,20 +52,20 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label asp-for="Invoice.InvoiceDate" class="control-label"></label>
-                            <input asp-for="Invoice.InvoiceDate" id="invoiceDate" type="date" class="form-control" />
+                        <input asp-for="Invoice.InvoiceDate" tabindex="2" id="invoiceDate" type="date" class="form-control" />
                             <span asp-validation-for="Invoice.InvoiceDate" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Invoice.InvoiceStatus" class="control-label"></label>
-                            <select asp-for="Invoice.InvoiceStatus" class="form-control">
+                        <select asp-for="Invoice.InvoiceStatus" tabindex="4" class="form-control">
                                 <option value="Not Paid">Not Paid</option>
                                 <option value="Paid">Paid</option>
                             </select>
                             <span asp-validation-for="Invoice.InvoiceStatus" class="text-danger"></span>
                         </div>
-                    <hr style="color:aqua" />
+                    <hr style="color:orangered" />
                         <div class="form-group">
-                        <label asp-for="Invoice.InvoiceControlAccount" class="control-label" style="display: inline;">Control Account: </label>
+                        <label asp-for="Invoice.InvoiceControlAccount" tabindex="6" class="control-label" style="display: inline;">Control Account: </label>
                             <p id="controlAccountLabel" style="display: inline;">Debtors Control</p>
                             <input type="hidden" asp-for="Invoice.InvoiceControlAccount" />
                             <span asp-validation-for="Invoice.InvoiceControlAccount" class="text-danger"></span>
@@ -75,35 +75,35 @@
                             <input type="hidden" asp-for="Invoice.InvoiceAccount" />
                             <span asp-validation-for="Invoice.InvoiceAccount" class="text-danger"></span>
                         </div>
-                    <hr style="color:aqua" />
+                    <hr style="color:orangered" />
                         <div class="form-group">
                             <label asp-for="Invoice.AccountEmail" class="control-label"></label>
-                            <input asp-for="Invoice.AccountEmail" class="form-control" />
+                        <input asp-for="Invoice.AccountEmail" tabindex="8" class="form-control" />
                             <span asp-validation-for="Invoice.AccountEmail" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
-            <hr style="color:aqua" />
+            <hr style="color:orangered" />
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
                         <label asp-for="Invoice.InvoiceItem" class="control-label">Stock Item</label>
-                        <input asp-for="Invoice.InvoiceItem" class="form-control" />
+                        <input asp-for="Invoice.InvoiceItem"tabindex="10" class="form-control" />
                         <span asp-validation-for="Invoice.InvoiceItem" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Invoice.Quantity" class="control-label"></label>
-                        <input asp-for="Invoice.Quantity" class="form-control" />
+                        <input asp-for="Invoice.Quantity" tabindex="12" class="form-control" />
                         <span asp-validation-for="Invoice.Quantity" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Invoice.NetAmount" class="control-label">Net Amount</label>
-                        <input asp-for="Invoice.NetAmount" readonly="readonly" class="form-control" />
+                        <input asp-for="Invoice.NetAmount" tabindex="14" readonly="readonly"  class="form-control" />
                         <span asp-validation-for="Invoice.NetAmount" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Invoice.TaxCode" class="control-label">Tax (%)</label>
-                        <input asp-for="Invoice.TaxCode" class="form-control" />
+                        <input asp-for="Invoice.TaxCode" tabindex="16" class="form-control" />
                         <span asp-validation-for="Invoice.TaxCode" class="text-danger"></span>
                     </div>
                 </div>
@@ -111,17 +111,17 @@
                        
                         <div class="form-group">
                             <label asp-for="Invoice.Description" class="control-label"></label>
-                            <input asp-for="Invoice.Description" class="form-control" />
+                            <input asp-for="Invoice.Description" tabindex="11" class="form-control" />
                             <span asp-validation-for="Invoice.Description" class="text-danger"></span>
                         </div>                       
                         <div class="form-group">
                             <label asp-for="Invoice.UnitPrice" class="control-label">Unit Price</label>
-                            <input asp-for="Invoice.UnitPrice" class="form-control" />
+                            <input asp-for="Invoice.UnitPrice" tabindex="13" class="form-control" />
                             <span asp-validation-for="Invoice.UnitPrice" class="text-danger"></span>
                         </div>
                     <div class="form-group">
                         <label asp-for="Invoice.CurrencyCode" class="control-label">Currency</label>                       
-                        <select asp-for="Invoice.CurrencyCode" class="form-control">
+                        <select asp-for="Invoice.CurrencyCode" tabindex="15" class="form-control">
                             <option value="USD">USD</option>
                             <option value="GBP">GBP</option>
                         </select>
@@ -129,14 +129,14 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Invoice.TaxAmount" class="control-label">Tax Amount</label>
-                        <input asp-for="Invoice.TaxAmount" readonly="readonly" class="form-control" />
+                        <input asp-for="Invoice.TaxAmount" tabindex="17" readonly="readonly" class="form-control" />
                         <span asp-validation-for="Invoice.TaxAmount" class="text-danger"></span>
                     </div>
                 </div>
             </div>  
             <div class="form-group">
                 <label asp-for="Invoice.GrossAmount" class="control-label">Gross Total</label>
-                <input asp-for="Invoice.GrossAmount" readonly="readonly" class="form-control" />
+                <input asp-for="Invoice.GrossAmount" tabindex="18" readonly="readonly" class="form-control" />
                 <span asp-validation-for="Invoice.GrossAmount" class="text-danger"></span>
             </div>   
             <div class="row">                             
@@ -154,13 +154,13 @@
                     </div>
                 </div>
             </div>
-          <hr/>
+            <hr style="color:orangered" />
             <div class="accordion-button">
                 <div class="col-6">
-                     <a asp-page="Index">Back to List</a>
+                     <a asp-page="Index" tabindex="21">Back to List</a>
                 </div>
                 <div class="col-6" style="text-align:right">
-                    <input type="submit" value="Create Invoice" class="btn btn-primary" />
+                    <input type="submit" tabindex="20" value="Create Invoice" class="btn btn-primary" />
                 </div>
                 
             </div>
