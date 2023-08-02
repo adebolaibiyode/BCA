@@ -5,11 +5,11 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 style="color:blueviolet">Invoice Details </h1>
 
-<div>
-    <h4>Invoice</h4>
-    <hr />
+<div style="text-align:justify-all">
+    <h4></h4>
+    <hr style="color:orangered" />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Invoice.InvoiceType)
@@ -139,7 +139,7 @@
         </dd>
     </dl>
 </div>
-<div>
+<div class="accordion-button">
     <a asp-page="./Edit" asp-route-id="@Model.Invoice?.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
