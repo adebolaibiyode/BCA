@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.Invoice[0].InvoiceType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceDate)
+                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceDate.Date)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Invoice[0].InvoiceNumber)
@@ -86,7 +86,7 @@
                 @Html.DisplayFor(modelItem => item.InvoiceType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InvoiceDate)
+                @Html.DisplayFor(modelItem => item.InvoiceDate.Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InvoiceNumber)

@@ -22,19 +22,21 @@
                                 <option value="PI">Purchase Invoice</option>
                             </select>
                             <span asp-validation-for="Invoice.InvoiceType" class="text-danger"></span>
-                        </div>
-                      
+                        </div>                      
                         <div class="form-group">
                             <label asp-for="Invoice.InvoiceNumber" class="control-label"></label>
-                            <input asp-for="Invoice.InvoiceNumber" class="form-control" />
+                            <input  value=@Model.Invoice.InvoiceNumber disabled ="disabled" class="form-control" />
+                            <input asp-for="Invoice.InvoiceNumber" value=@Model.Invoice.InvoiceNumber type="hidden" />
                             <span asp-validation-for="Invoice.InvoiceNumber" class="text-danger"></span>
                         </div>
+                    <hr style="color:aqua" />
                         <div class="form-group">
                             <label asp-for="Invoice.AccountType" class="control-label" style="display: inline;">Account Type: </label>
                             <p id="accountTypeLabel" style="display: inline;">Customer</p>
                             <input asp-for="Invoice.AccountType" type="hidden" class="form-control" />
                             <span asp-validation-for="Invoice.AccountType" class="text-danger"></span>
                         </div>
+                    <hr style="color:aqua" />
                     <div class="form-group">
                         <label asp-for="Invoice.AccountName" class="control-label"></label>
                         <input asp-for="Invoice.AccountName" class="form-control" />
@@ -61,22 +63,24 @@
                             </select>
                             <span asp-validation-for="Invoice.InvoiceStatus" class="text-danger"></span>
                         </div>
+                    <hr style="color:aqua" />
                         <div class="form-group">
                         <label asp-for="Invoice.InvoiceControlAccount" class="control-label" style="display: inline;">Control Account: </label>
-                        <p id="controlAccountLabel" style="display: inline;">Debtors Control</p>
-                        <input type="hidden" asp-for="Invoice.InvoiceControlAccount" />
-                        <span asp-validation-for="Invoice.InvoiceControlAccount" class="text-danger"></span>
-                        <p style="display: inline;"> ||   </p>
-                        <label asp-for="Invoice.InvoiceAccount" class="control-label" style="display: inline;">Account Group: </label>
-                        <p id="invoiceAccountLabel" style="display: inline;">SA01</p>
+                            <p id="controlAccountLabel" style="display: inline;">Debtors Control</p>
+                            <input type="hidden" asp-for="Invoice.InvoiceControlAccount" />
+                            <span asp-validation-for="Invoice.InvoiceControlAccount" class="text-danger"></span>
+                            <p style="display: inline;"> ||   </p>
+                            <label asp-for="Invoice.InvoiceAccount" class="control-label" style="display: inline;">Account Group: </label>
+                            <p id="invoiceAccountLabel" style="display: inline;">SA01</p>
                             <input type="hidden" asp-for="Invoice.InvoiceAccount" />
                             <span asp-validation-for="Invoice.InvoiceAccount" class="text-danger"></span>
                         </div>
-                    <div class="form-group">
-                        <label asp-for="Invoice.AccountEmail" class="control-label"></label>
-                        <input asp-for="Invoice.AccountEmail" class="form-control" />
-                        <span asp-validation-for="Invoice.AccountEmail" class="text-danger"></span>
-                    </div>
+                    <hr style="color:aqua" />
+                        <div class="form-group">
+                            <label asp-for="Invoice.AccountEmail" class="control-label"></label>
+                            <input asp-for="Invoice.AccountEmail" class="form-control" />
+                            <span asp-validation-for="Invoice.AccountEmail" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
     <hr />
@@ -183,6 +187,26 @@
             } else {
                 console.log("invoiceType element not found");
             }
+
+            var invoiceAccountName = document.getElementById('Invoice_AccountName');
+            if (invoiceAccountName) {
+                console.log("invoiceAccountName element found");
+            } else {
+                console.log("invoiceAccountName element not found");
+            }
+
+            invoiceAccountName.addEventListener('change',function() {
+                console.log("Change event for invoiceAccountName triggered");
+                var invoiceName = this.value;
+                var accountReferenceHidden = document.getElementById('Invoice_AccountReference');
+                var accountReference = document.getElementById('accountRef');
+                var invoiceNum = document.getElementById('Invoice_InvoiceNumber');
+
+                var now = new Date();
+                accountReference.textContent = invoiceName + '_' + @Model.Invoice.InvoiceNumber  + '_' + now.toISOString();
+                accountReferenceHidden.value = invoiceName + '_' + @Model.Invoice.InvoiceNumber  + '_' + now.toISOString();
+
+            });
 
             invoiceTypeDropdown.addEventListener('change', function () {
                 console.log("Change event triggered");

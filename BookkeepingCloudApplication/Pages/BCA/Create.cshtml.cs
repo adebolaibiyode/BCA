@@ -21,10 +21,15 @@ namespace BookkeepingCloudApplication.Pages.BCA
 
         public IActionResult OnGet()
         {
-            // Set DateEntered to today's date.
+            // Fetch max Invoice Number from the database and increment by 1
+            var maxInvoiceNumber = _context.Invoices.Max(i => i.InvoiceNumber);
+            var newInvoiceNumber = maxInvoiceNumber + 1;
+
+            // Set DateEntered to today's date and set new invoice number.
             Invoice = new Invoice
             {
-                DateEntered = DateTime.Now
+                DateEntered = DateTime.Now,
+                InvoiceNumber = newInvoiceNumber
             };
 
             return Page();
