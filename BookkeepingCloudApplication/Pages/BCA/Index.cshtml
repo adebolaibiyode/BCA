@@ -1,0 +1,156 @@
+﻿@page
+@model BookkeepingCloudApplication.Pages.BCA.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceControlAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].AccountEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].AccountReference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].AccountType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceItem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].NetAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].TaxCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].TaxAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].GrossAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].CurrencyCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].DateEntered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice[0].EnteredBy)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Invoice) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceControlAccount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceAccount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountReference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NetAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrossAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrencyCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEntered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnteredBy)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
