@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using BookkeepingCloudApplication.Data;
 using BookkeepingCloudApplication.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookkeepingCloudApplication.Pages.BCA
 {
@@ -14,23 +9,44 @@ namespace BookkeepingCloudApplication.Pages.BCA
     {
         private readonly BookkeepingCloudApplication.Data.ApplicationDbContext _context;
 
-        public CreateModel(BookkeepingCloudApplication.Data.ApplicationDbContext context)
+        //public CreateModel(BookkeepingCloudApplication.Data.ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
+
+        private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+       
+
+        public CreateModel(
+            BookkeepingCloudApplication.Data.ApplicationDbContext context,
+            Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
+            IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            // Fetch max Invoice Number from the database and increment by 1
-            var maxInvoiceNumber = _context.Invoices.Max(i => i.InvoiceNumber);
-            var newInvoiceNumber = maxInvoiceNumber + 1;
+            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
-            // Set DateEntered to today's date and set new invoice number.
-            Invoice = new Invoice
+            // If the user is logged in, user will be non-null.
+            if (user != null)
             {
-                DateEntered = DateTime.Now,
-                InvoiceNumber = newInvoiceNumber
-            };
+                // Fetch max Invoice Number from the database and increment by 1
+                var maxInvoiceNumber = _context.Invoices.Max(i => i.InvoiceNumber);
+                var newInvoiceNumber = maxInvoiceNumber + 1;
+
+                // Set DateEntered to today's date and set new invoice number.
+                Invoice = new Invoice
+                {
+                    DateEntered = DateTime.Now,
+                    InvoiceNumber = newInvoiceNumber,
+                    EnteredBy = user.Email
+                };
+            }
 
             return Page();
         }

@@ -514,3 +514,4 @@ C:\Users\AdebolaIbiyode\source\repos\CSE_682\adebolaibiyode\BCA\BookkeepingCloud
 C:\Users\AdebolaIbiyode\source\repos\CSE_682\adebolaibiyode\BCA\BookkeepingCloudApplication\obj\Debug\net6.0\BookkeepingCloudApplication.pdb
 C:\Users\AdebolaIbiyode\source\repos\CSE_682\adebolaibiyode\BCA\BookkeepingCloudApplication\obj\Debug\net6.0\BookkeepingCloudApplication.genruntimeconfig.cache
 C:\Users\AdebolaIbiyode\source\repos\CSE_682\adebolaibiyode\BCA\BookkeepingCloudApplication\obj\Debug\net6.0\ref\BookkeepingCloudApplication.dll
+C:\Users\AdebolaIbiyode\source\repos\CSE_682\adebolaibiyode\BCA\BookkeepingCloudApplication\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll

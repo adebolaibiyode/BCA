@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-    <hr />
+            <hr style="color:aqua" />
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
@@ -98,7 +98,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Invoice.NetAmount" class="control-label">Net Amount</label>
-                        <input asp-for="Invoice.NetAmount" class="form-control" />
+                        <input asp-for="Invoice.NetAmount" readonly="readonly" class="form-control" />
                         <span asp-validation-for="Invoice.NetAmount" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -120,28 +120,31 @@
                             <span asp-validation-for="Invoice.UnitPrice" class="text-danger"></span>
                         </div>
                     <div class="form-group">
-                        <label asp-for="Invoice.CurrencyCode" class="control-label">Currency</label>
-                        <input asp-for="Invoice.CurrencyCode" class="form-control" />
+                        <label asp-for="Invoice.CurrencyCode" class="control-label">Currency</label>                       
+                        <select asp-for="Invoice.CurrencyCode" class="form-control">
+                            <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
+                        </select>
                         <span asp-validation-for="Invoice.CurrencyCode" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Invoice.TaxAmount" class="control-label">Tax Amount</label>
-                        <input asp-for="Invoice.TaxAmount" class="form-control" />
+                        <input asp-for="Invoice.TaxAmount" readonly="readonly" class="form-control" />
                         <span asp-validation-for="Invoice.TaxAmount" class="text-danger"></span>
                     </div>
                 </div>
             </div>  
             <div class="form-group">
                 <label asp-for="Invoice.GrossAmount" class="control-label">Gross Total</label>
-                <input asp-for="Invoice.GrossAmount" class="form-control" />
+                <input asp-for="Invoice.GrossAmount" readonly="readonly" class="form-control" />
                 <span asp-validation-for="Invoice.GrossAmount" class="text-danger"></span>
             </div>   
             <div class="row">                             
                 <div class="col-6">
                     <div class="form-group">
                         <label asp-for="Invoice.EnteredBy" class="control-label">Created By</label>
-                        <input asp-for="Invoice.EnteredBy" class="form-control" />
-                        <span asp-validation-for="Invoice.EnteredBy" class="text-danger"></span>
+                        <input asp-for="Invoice.EnteredBy" alue=@Model.Invoice.EnteredBy readonly="readonly" class="form-control" />
+                        <span asp-validation-for="Invoice.EnteredBy"  class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-6" style="text-align:right">
@@ -194,6 +197,23 @@
             } else {
                 console.log("invoiceAccountName element not found");
             }
+
+            var invoiceQuantity = document.getElementById('Invoice_Quantity');
+            var invoiceUnitPrice = document.getElementById('Invoice_UnitPrice');
+            var invoiceNetAmount = document.getElementById('Invoice_NetAmount');
+            var invoiceTaxCode = document.getElementById('Invoice_TaxCode');
+            var invoiceTaxAmount = document.getElementById('Invoice_TaxAmount');
+            var invoiceGrossAmount = document.getElementById('Invoice_GrossAmount');
+
+            invoiceUnitPrice.addEventListener('change', function () {
+                console.log("Change event for invoiceUnitPrice triggered");
+                var unitPrice = this.value;
+                console.log(unitPrice);
+                invoiceNetAmount.value = parseFloat(invoiceQuantity.value) * parseFloat(unitPrice);
+                invoiceTaxAmount.value = parseFloat(invoiceNetAmount.value) * parseFloat(invoiceTaxCode.value);
+                invoiceGrossAmount.value = parseFloat(invoiceNetAmount.value) + parseFloat(invoiceTaxAmount.value);
+
+            });
 
             invoiceAccountName.addEventListener('change',function() {
                 console.log("Change event for invoiceAccountName triggered");
