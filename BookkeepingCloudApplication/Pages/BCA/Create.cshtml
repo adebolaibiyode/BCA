@@ -223,8 +223,8 @@
                 var invoiceNum = document.getElementById('Invoice_InvoiceNumber');
 
                 var now = new Date();
-                accountReference.textContent = invoiceName + '_' + @Model.Invoice.InvoiceNumber  + '_' + now.toISOString();
-                accountReferenceHidden.value = invoiceName + '_' + @Model.Invoice.InvoiceNumber  + '_' + now.toISOString();
+                accountReference.textContent = invoiceName + '_' + @Model.Invoice.InvoiceNumber  + '_' + now.toLocaleDateString().replace('/', '').replace('/', '');
+                accountReferenceHidden.value = invoiceName + '_' + @Model.Invoice.InvoiceNumber  + '_' + now.toLocaleDateString().replace('/', '').replace('/', '');
 
             });
 

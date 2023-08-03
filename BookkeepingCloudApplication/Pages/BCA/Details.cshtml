@@ -7,7 +7,7 @@
 
 <h1 style="color:blueviolet">Invoice Details </h1>
 
-<div style="text-align:justify-all">
+<div style="text-align:justify-all; vertical-align:middle;">
     <h4></h4>
     <hr style="color:orangered" />
     <dl class="row">
@@ -140,6 +140,11 @@
     </dl>
 </div>
 <div class="accordion-button">
-    <a asp-page="./Edit" asp-route-id="@Model.Invoice?.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <div class="col-md-6">
+        <a asp-page="./Edit" asp-route-id="@Model.Invoice?.Id">Edit</a>
+    </div>
+    <div class="col-md-6" style="text-align:right">
+        <a asp-page="./Index">Back to List</a>
+    </div>
+    
 </div>

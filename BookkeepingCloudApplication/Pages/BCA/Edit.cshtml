@@ -34,7 +34,7 @@
                     <hr style="color:orangered" />
                     <div class="form-group">
                         <label asp-for="Invoice.AccountType" tabindex="5" class="control-label" style="display: inline;">Account Type: </label>
-                        <p id="accountTypeLabel" style="display: inline;">Customer</p>
+                        <p id="accountTypeLabel" style="display: inline;">@Model.Invoice.AccountType</p>
                         <input asp-for="Invoice.AccountType" type="hidden" class="form-control" />
                         <span asp-validation-for="Invoice.AccountType" class="text-danger"></span>
                     </div>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Invoice.AccountReference" tabindex="9" class="control-label" style="display: inline;">Reference: </label>
-                        <p id="accountRef" style="display: inline;"></p>
+                        <p id="accountRef" style="display: inline;">@Model.Invoice.AccountReference </p>
                         <input asp-for="Invoice.AccountReference" type="hidden" class="form-control" />
                         <span asp-validation-for="Invoice.AccountReference" class="text-danger"></span>
                     </div>
@@ -68,12 +68,12 @@
                     <hr style="color:orangered" />
                     <div class="form-group">
                         <label asp-for="Invoice.InvoiceControlAccount" tabindex="6" class="control-label" style="display: inline;">Control Account: </label>
-                        <p id="controlAccountLabel" style="display: inline;">Debtors Control</p>
+                        <p id="controlAccountLabel" style="display: inline;">@Model.Invoice.InvoiceControlAccount </p>
                         <input type="hidden" asp-for="Invoice.InvoiceControlAccount" />
                         <span asp-validation-for="Invoice.InvoiceControlAccount" class="text-danger"></span>
                         <p style="display: inline;"> ||   </p>
                         <label asp-for="Invoice.InvoiceAccount" class="control-label" style="display: inline;">Account Group: </label>
-                        <p id="invoiceAccountLabel" style="display: inline;">SA01</p>
+                        <p id="invoiceAccountLabel" style="display: inline;">@Model.Invoice.InvoiceAccount </p>
                         <input type="hidden" asp-for="Invoice.InvoiceAccount" />
                         <span asp-validation-for="Invoice.InvoiceAccount" class="text-danger"></span>
                     </div>
@@ -222,8 +222,8 @@
                 var invoiceNum = document.getElementById('Invoice_InvoiceNumber');
 
                 var now = new Date();
-                accountReference.textContent = invoiceName + '_' + @Model.Invoice.InvoiceNumber  + '_' + now.toISOString();
-                accountReferenceHidden.value = invoiceName + '_' + @Model.Invoice.InvoiceNumber  + '_' + now.toISOString();
+                accountReference.textContent = invoiceName + '_' + @Model.Invoice.InvoiceNumber  + '_' + now.toLocaleDateString().replace('/', '').replace('/', '');
+                accountReferenceHidden.value = invoiceName + '_' + @Model.Invoice.InvoiceNumber  + '_' + now.toLocaleDateString().replace('/', '').replace('/', '');
 
             });
 
