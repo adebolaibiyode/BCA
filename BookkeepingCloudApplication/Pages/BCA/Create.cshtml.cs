@@ -36,8 +36,16 @@ namespace BookkeepingCloudApplication.Pages.BCA
             if (user != null)
             {
                 // Fetch max Invoice Number from the database and increment by 1
-                var maxInvoiceNumber = _context.Invoices.Max(i => i.InvoiceNumber);
-                var newInvoiceNumber = maxInvoiceNumber + 1;
+                int newInvoiceNumber;
+                try
+                {
+                    int maxInvoiceNumber = _context.Invoices.Max(i => i.InvoiceNumber);
+                    newInvoiceNumber = maxInvoiceNumber + 1;
+                }
+                catch (Exception ex)
+                {
+                    newInvoiceNumber = 1;
+                }
 
                 // Set DateEntered to today's date and set new invoice number.
                 Invoice = new Invoice
