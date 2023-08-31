@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using BookkeepingCloudApplication.Data;
 using BookkeepingCloudApplication.Models;
+using BookkeepingCloudApplication.Managers;
 
 namespace BookkeepingCloudApplication.Pages.BCA
 {
     public class DeleteModel : PageModel
     {
-        private readonly BookkeepingCloudApplication.Data.ApplicationDbContext _context;
+        private readonly IInvoiceManager _invoiceManager;
 
-        public DeleteModel(BookkeepingCloudApplication.Data.ApplicationDbContext context)
+        public DeleteModel(IInvoiceManager invoiceManager)
         {
-            _context = context;
+            _invoiceManager = invoiceManager;
         }
 
         [BindProperty]
@@ -24,12 +19,12 @@ namespace BookkeepingCloudApplication.Pages.BCA
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Invoices == null)
+            if (id == null || _invoiceManager.GetIsInvoicesNull())
             {
                 return NotFound();
             }
 
-            var invoice = await _context.Invoices.FirstOrDefaultAsync(m => m.Id == id);
+            var invoice = _invoiceManager.GetInvoiceById((int)id);
 
             if (invoice == null)
             {
@@ -44,18 +39,12 @@ namespace BookkeepingCloudApplication.Pages.BCA
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Invoices == null)
+            if (id == null || _invoiceManager.GetIsInvoicesNull())
             {
                 return NotFound();
             }
-            var invoice = await _context.Invoices.FindAsync(id);
 
-            if (invoice != null)
-            {
-                Invoice = invoice;
-                _context.Invoices.Remove(Invoice);
-                await _context.SaveChangesAsync();
-            }
+            _invoiceManager.DeleteInvoiceById((int)id);
 
             return RedirectToPage("./Index");
         }

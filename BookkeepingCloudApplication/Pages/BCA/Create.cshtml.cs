@@ -2,28 +2,24 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BookkeepingCloudApplication.Models;
 using Microsoft.AspNetCore.Identity;
+using BookkeepingCloudApplication.Managers;
 
 namespace BookkeepingCloudApplication.Pages.BCA
 {
     public class CreateModel : PageModel
     {
-        private readonly BookkeepingCloudApplication.Data.ApplicationDbContext _context;
 
-        //public CreateModel(BookkeepingCloudApplication.Data.ApplicationDbContext context)
-        //{
-        //    _context = context;
-        //}
-
+        private readonly IInvoiceManager _invoiceManager;
         private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
        
 
         public CreateModel(
-            BookkeepingCloudApplication.Data.ApplicationDbContext context,
+            IInvoiceManager invoiceManager,
             Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
             IHttpContextAccessor httpContextAccessor)
         {
-            _context = context;
+            _invoiceManager = invoiceManager;
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -36,8 +32,16 @@ namespace BookkeepingCloudApplication.Pages.BCA
             if (user != null)
             {
                 // Fetch max Invoice Number from the database and increment by 1
-                var maxInvoiceNumber = _context.Invoices.Max(i => i.InvoiceNumber);
-                var newInvoiceNumber = maxInvoiceNumber + 1;
+                int newInvoiceNumber;
+                try
+                {
+                    int maxInvoiceNumber = _invoiceManager.GetMaximumInvoiceNumber();
+                    newInvoiceNumber = maxInvoiceNumber + 1;
+                }
+                catch (Exception ex)
+                {
+                    newInvoiceNumber = 1;
+                }
 
                 // Set DateEntered to today's date and set new invoice number.
                 Invoice = new Invoice
@@ -58,13 +62,12 @@ namespace BookkeepingCloudApplication.Pages.BCA
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Invoices == null || Invoice == null)
+            if (!ModelState.IsValid || _invoiceManager.GetIsInvoicesNull() || Invoice == null)
             {
-                return Page();
+                 return Page();
             }
 
-            _context.Invoices.Add(Invoice);
-            await _context.SaveChangesAsync();
+            _invoiceManager.CreateInvoice(Invoice);
 
             return RedirectToPage("./Index");
         }

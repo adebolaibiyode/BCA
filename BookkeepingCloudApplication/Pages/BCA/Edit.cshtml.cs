@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BookkeepingCloudApplication.Data;
 using BookkeepingCloudApplication.Models;
+using BookkeepingCloudApplication.Managers;
 
 namespace BookkeepingCloudApplication.Pages.BCA
 {
     public class EditModel : PageModel
     {
-        private readonly BookkeepingCloudApplication.Data.ApplicationDbContext _context;
+        private readonly IInvoiceManager _invoiceManager;
 
-        public EditModel(BookkeepingCloudApplication.Data.ApplicationDbContext context)
+        public EditModel(IInvoiceManager invoiceManager)
         {
-            _context = context;
+            _invoiceManager = invoiceManager;
         }
 
         [BindProperty]
@@ -25,12 +20,12 @@ namespace BookkeepingCloudApplication.Pages.BCA
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Invoices == null)
+            if (id == null || _invoiceManager.GetIsInvoicesNull())
             {
                 return NotFound();
             }
 
-            var invoice =  await _context.Invoices.FirstOrDefaultAsync(m => m.Id == id);
+            var invoice = _invoiceManager.GetInvoiceById((int)id);
             if (invoice == null)
             {
                 return NotFound();
@@ -48,15 +43,13 @@ namespace BookkeepingCloudApplication.Pages.BCA
                 return Page();
             }
 
-            _context.Attach(Invoice).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _invoiceManager.UpdateInvoice(Invoice);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!InvoiceExists(Invoice.Id))
+                if (_invoiceManager.GetInvoiceById((int)Invoice.Id) == null)
                 {
                     return NotFound();
                 }
@@ -67,11 +60,6 @@ namespace BookkeepingCloudApplication.Pages.BCA
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool InvoiceExists(int id)
-        {
-          return (_context.Invoices?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

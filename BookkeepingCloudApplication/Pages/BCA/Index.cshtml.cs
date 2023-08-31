@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using BookkeepingCloudApplication.Data;
 using BookkeepingCloudApplication.Models;
+using BookkeepingCloudApplication.Managers;
 
 namespace BookkeepingCloudApplication.Pages.BCA
 {
     public class IndexModel : PageModel
     {
-        private readonly BookkeepingCloudApplication.Data.ApplicationDbContext _context;
+        private readonly IInvoiceManager _invoiceManager;
 
-        public IndexModel(BookkeepingCloudApplication.Data.ApplicationDbContext context)
+        public IndexModel(IInvoiceManager invoiceManager)
         {
-            _context = context;
+            _invoiceManager = invoiceManager;
         }
 
         public IList<Invoice> Invoice { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Invoices != null)
+            if (!_invoiceManager.GetIsInvoicesNull())
             {
-                Invoice = await _context.Invoices.ToListAsync();
+                Invoice = _invoiceManager.GetInvoices(int.MaxValue, 0);
             }
         }
     }
