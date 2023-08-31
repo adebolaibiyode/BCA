@@ -31,23 +31,10 @@ namespace BookkeepingCloudApplication.Pages.BCA
             // If the user is logged in, user will be non-null.
             if (user != null)
             {
-                // Fetch max Invoice Number from the database and increment by 1
-                int newInvoiceNumber;
-                try
-                {
-                    int maxInvoiceNumber = _invoiceManager.GetMaximumInvoiceNumber();
-                    newInvoiceNumber = maxInvoiceNumber + 1;
-                }
-                catch (Exception ex)
-                {
-                    newInvoiceNumber = 1;
-                }
-
                 // Set DateEntered to today's date and set new invoice number.
                 Invoice = new Invoice
                 {
                     DateEntered = DateTime.Now,
-                    InvoiceNumber = newInvoiceNumber,
                     EnteredBy = user.Email
                 };
             }

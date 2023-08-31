@@ -22,6 +22,19 @@ namespace BookkeepingCloudApplication.Managers
         {
             // TODO - additional model validation.
 
+            // Fetch max Invoice Number from the database and increment by 1
+            int newInvoiceNumber;
+            try
+            {
+                int maxInvoiceNumber = GetMaximumInvoiceNumber();
+                newInvoiceNumber = maxInvoiceNumber + 1;
+            }
+            catch (Exception ex)
+            {
+                newInvoiceNumber = 1;
+            }
+            invoice.Id = newInvoiceNumber;
+
             _context.Invoices.Add(invoice);
             return SaveChanges();
         }
