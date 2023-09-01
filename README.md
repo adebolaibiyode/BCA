@@ -1,5 +1,7 @@
 BCA - Bookkeeping Cloud Application
+
 CSE682 - Invoice Management Web Application in .NET Core
+
 Overview
 BCA is a robust Invoice Management System developed using the powerful .NET Core framework and follows the MVC (Model-View-Controller) design pattern. This application facilitates users in performing CRUD operations on invoices, i.e., create, read, update, and delete. It leverages an SQL database for invoice storage, which can be accessed via a connection string specified in the appsettings.json file.
 
