@@ -1,43 +1,52 @@
-# BCA
-Bookkeeping cloud application - CSE682
-
-Invoice Management Web Application in .NET Core
+BCA - Bookkeeping Cloud Application
+CSE682 - Invoice Management Web Application in .NET Core
 Overview
-This is a simple Invoice Management System developed using .NET Core and MVC (Model-View-Controller) design pattern. The application enables users to create, read, update, and delete invoices. It uses a SQL database for storing invoices, and the database is accessed via a connection string defined in the appsettings.json file.
+BCA is a robust Invoice Management System developed using the powerful .NET Core framework and follows the MVC (Model-View-Controller) design pattern. This application facilitates users in performing CRUD operations on invoices, i.e., create, read, update, and delete. It leverages an SQL database for invoice storage, which can be accessed via a connection string specified in the appsettings.json file.
 
 Pre-requisites
 .NET SDK
-SQL Server or any other database that you can connect via a connection string.
-Visual Studio (Optional, but recommended)
-
+SQL Server or any other database accessible via a connection string.
+Visual Studio (Recommended but not mandatory)
 Setup Instructions
-1. Clone the repository
+Clone the Repository:
+Clone the BCA repository from GitHub using the following command:
+
 git clone https://github.com/adebolaibiyode/BCA
 
-2. Navigate to Project Directory
+Navigate to Project Directory:
+Restore the dependencies and tools of the project using the command:
+
 dotnet restore
 
-3. Update Database Connection String
-Open appsettings.json and replace the ConnectionString in:
-json
-Copy code
+Update Database Connection String:
+Open the appsettings.json file and update the DefaultConnection in the ConnectionStrings section with your database connection string:
+
 "ConnectionStrings": {
   "DefaultConnection": "your_connection_string_here"
 }
 
-4. Run Database Migrations
+Run Database Migrations:
+Apply the pending migrations to update the database schema using the command:
+
 dotnet ef database update
-Note: If the Entity Framework CLI is not installed, you can install it using the following command:
+
+Note: If the Entity Framework CLI is not installed, install it using the following command:
+
 dotnet tool install --global dotnet-ef
 
-5. Run the application
+Run the Application:
+Run the application using the command:
+
 dotnet run
 
-After running the application, navigate to http://localhost:5000 or https://localhost:5001 in your web browser.
+After successfully running the application, open your web browser and navigate to http://localhost:5000 or https://localhost:5001.
 
 Technology Stack
 .NET Core
 SQL Server
 Entity Framework Core
 HTML, CSS, Bootstrap
-JavaScript (optional for client-side logic)
+JavaScript (Optional for client-side logic)
+
+Acknowledgement
+Special thanks to everyone who contributed to the development of this application. Your effort is highly appreciated!
