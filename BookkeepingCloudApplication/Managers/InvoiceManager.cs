@@ -33,7 +33,12 @@ namespace BookkeepingCloudApplication.Managers
             {
                 newInvoiceNumber = 1;
             }
-            invoice.Id = newInvoiceNumber;
+
+            // this caused an identity runtime error.Invoice.Id is an identity column and should not be passed to
+            //invoice.Id = newInvoiceNumber;
+
+            //correct implementation :AI
+            invoice.InvoiceNumber = newInvoiceNumber;
 
             _context.Invoices.Add(invoice);
             return SaveChanges();
@@ -57,9 +62,57 @@ namespace BookkeepingCloudApplication.Managers
         }
 
         /// <inheritdoc/>
+
+        //Get invoice updated to order by invoice number
         public IList<Invoice> GetInvoices(uint count, uint page)
         {
-            return _context.Invoices.Skip((int)(0 * count)).Take((int)count).ToList();
+            return _context.Invoices.OrderBy(i => i.InvoiceNumber).Skip((int)(page * count)).Take((int)count).ToList();
+        }
+
+        public InvoiceModel GetInvoiceByInvoiceNumber(int invoicenumber)
+        {
+            IList<Invoice> invoices = _context.Invoices.Where(i => i.InvoiceNumber == invoicenumber).ToList();
+
+            // Create an InvoiceHeader object from the first invoice
+            InvoiceHeader invoiceHeader = new InvoiceHeader
+            {
+                InvoiceType = invoices[0].InvoiceType,
+                InvoiceDate = invoices[0].InvoiceDate,
+                InvoiceNumber = invoices[0].InvoiceNumber,
+                InvoiceAccount = invoices[0].InvoiceAccount,
+                InvoiceControlAccount = invoices[0].InvoiceControlAccount,
+                InvoiceStatus = invoices[0].InvoiceStatus,
+                AccountEmail = invoices[0].AccountEmail,
+                AccountName = invoices[0].AccountName,
+                AccountReference = invoices[0].AccountReference,
+                AccountType = invoices[0].AccountType,
+                CurrencyCode = invoices[0].CurrencyCode              
+            };
+
+            // Create InvoiceLine objects from all invoices
+            List<InvoiceLine> invoiceLines = invoices.Select(invoice => new InvoiceLine
+            {
+                InvoiceItem = invoice.InvoiceItem,
+                Description = invoice.Description,
+                Quantity = invoice.Quantity,
+                UnitPrice = invoice.UnitPrice,
+                Id = invoice.Id,
+                GrossAmount = invoice.GrossAmount,
+                NetAmount = invoice.NetAmount,
+                TaxAmount = invoice.TaxAmount,
+                TaxCode = invoice.TaxCode,
+                EnteredBy = invoice.EnteredBy,
+                DateEntered = invoice.DateEntered
+                
+            }).ToList();
+
+            // Create an Invoice object and set the InvoiceHeader and InvoiceLines
+            InvoiceModel finalInvoice = new InvoiceModel
+            {
+                InvoiceHeader = invoiceHeader,
+                InvoiceLines = invoiceLines,
+            };
+            return finalInvoice;
         }
 
         /// <inheritdoc/>
@@ -69,9 +122,23 @@ namespace BookkeepingCloudApplication.Managers
         }
 
         /// <inheritdoc/>
+        //public int GetMaximumInvoiceNumber()
+        //{
+        //    return _context.Invoices.Max(i => i.InvoiceNumber);
+        //}
+
+        //updated GetMaximumInvoiceNumber() method to handle the case when there are no invoices in the database:AI
         public int GetMaximumInvoiceNumber()
         {
-            return _context.Invoices.Max(i => i.InvoiceNumber);
+            return _context.Invoices.Any() ? _context.Invoices.Max(i => i.InvoiceNumber) : 0;
+        }
+
+        public bool AddInvoiceLine(Invoice invoice)
+        {
+            // TODO - additional model validation.
+
+            _context.Invoices.Add(invoice);
+            return SaveChanges();
         }
 
         /// <inheritdoc/>

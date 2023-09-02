@@ -32,6 +32,13 @@ namespace BookkeepingCloudApplication.Managers
         Invoice GetInvoiceById(int id);
 
         /// <summary>
+        /// Retrieves an invoice specified by invoicenumber
+        /// </summary>
+        /// <param name="invoicenumber">Invoice to retrieve</param>
+        /// <returns>The retrieved invoice.</returns>
+        InvoiceModel GetInvoiceByInvoiceNumber(int invoicenumber);
+
+        /// <summary>
         /// Deletes the specified Invoice by an ID
         /// </summary>
         /// <param name="id">Invoice to delete</param>
@@ -44,6 +51,13 @@ namespace BookkeepingCloudApplication.Managers
         /// <param name="invoice">The invoice to update</param>
         /// <returns>Indicates if the invoice has been updated successfully</returns>
         bool UpdateInvoice(Invoice invoice);
+
+        /// <summary>
+        /// Adds new invoice line to existing invoice andnd saves to the database.
+        /// </summary>
+        /// <param name="invoice">The invoice to update</param>
+        /// <returns>Indicates if the invoice has been updated successfully</returns>
+        bool AddInvoiceLine(Invoice invoice);
 
         /// <summary>
         /// Retrieves all invoices.

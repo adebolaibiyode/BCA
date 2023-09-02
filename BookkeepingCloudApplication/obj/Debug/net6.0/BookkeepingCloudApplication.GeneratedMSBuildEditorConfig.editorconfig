@@ -64,6 +64,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQkNBXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/AdebolaIbiyode/source/repos/CSE_682/adebolaibiyode/BCA/BookkeepingCloudApplication/Pages/BCA/InvoiceDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQkNBXEludm9pY2VEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/AdebolaIbiyode/source/repos/CSE_682/adebolaibiyode/BCA/BookkeepingCloudApplication/Pages/BCA/InvoiceLine.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQkNBXEludm9pY2VMaW5lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/AdebolaIbiyode/source/repos/CSE_682/adebolaibiyode/BCA/BookkeepingCloudApplication/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

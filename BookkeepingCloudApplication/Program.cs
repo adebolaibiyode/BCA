@@ -23,6 +23,17 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    // Using a scope, get the ApplicationDbContext service and 
+    // ensure the database is deleted and then migrated. 
+    // This is for development purposes only.
+    /*
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        db.Database.EnsureDeleted();
+        db.Database.Migrate();
+    }
+    */
 }
 else
 {

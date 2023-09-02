@@ -14,98 +14,68 @@
     <table class="table">
         <thead>
             <tr>
-                <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].InvoiceType)*@
+                <th style="color:orangered"></th>
+                <th style="color:orangered">                 
                     Type
                 </th>
-                <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].InvoiceDate.Date)*@
+                <th style="color:orangered">             
                     Date
                 </th>
-                <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].InvoiceNumber)*@
+                <th style="color:orangered">                   
                     Invoice
                 </th>
                 <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].InvoiceStatus)*@
                     Status
-                </th>
-                @*<th>
-                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceControlAccount)
-                </th>*@
-                @*<th style="color:orangered">
-                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceAccount)
-                </th>*@
+                </th>           
                 <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].AccountName)*@
                     Account
                 </th>
                 <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].AccountType)*@
                     Type
                 </th>
                 <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].AccountEmail)*@
                     Email
                 </th>
                 <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].AccountReference)*@
                     Reference
                 </th>
                 <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].InvoiceItem)*@
                     Item
                 </th>
                 <th style="color:orangered">
-                    @* @Html.DisplayNameFor(model => model.Invoice[0].Description)*@
                     Description
                 </th>
                 <th style="color:orangered">
-                    @* @Html.DisplayNameFor(model => model.Invoice[0].Quantity)*@
                     Qty
                 </th>
                 <th style="color:orangered">
-                    @* @Html.DisplayNameFor(model => model.Invoice[0].UnitPrice)*@
                     UnitPrice
                 </th>
                 <th style="color:orangered">
-                    @* @Html.DisplayNameFor(model => model.Invoice[0].NetAmount)*@
                     Net
-                </th>
-                @* <th style="color:orangered">
-                @Html.DisplayNameFor(model => model.Invoice[0].TaxCode)
-                Tax (%)
-                </th>*@
+                </th>           
                 <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].TaxAmount)*@
                     Tax
                 </th>
                 <th style="color:orangered">
-                    @* @Html.DisplayNameFor(model => model.Invoice[0].GrossAmount)*@
                     Gross
                 </th>
                 <th style="color:orangered">
-                    @*@Html.DisplayNameFor(model => model.Invoice[0].CurrencyCode)*@
                     Currency
                 </th>
-                @*<th>
-                @Html.DisplayNameFor(model => model.Invoice[0].DateEntered)
-                </th>
-                <th style="color:orangered">
-                @Html.DisplayNameFor(model => model.Invoice[0].EnteredBy)
-                </th>*@
-                <th style="color:orangered"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Invoice)
             {
                 <tr style="color:blue">
+                    <td style="width:-moz-fit-content">
+                        <a asp-page="./InvoiceDetail" asp-route-id="@item.InvoiceNumber">View Invoice</a>
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.InvoiceType)
                     </td>
-                    <td>
-                        @*  @Html.DisplayFor(modelItem => item.InvoiceDate.Date)*@
+                    <td>                        
                         @item.InvoiceDate.Date.ToString("MM/dd/yyyy")
                     </td>
                     <td>
@@ -114,12 +84,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.InvoiceStatus)
                     </td>
-                    @* <td>
-                @Html.DisplayFor(modelItem => item.InvoiceControlAccount)
-                </td>
-                <td>
-                @Html.DisplayFor(modelItem => item.InvoiceAccount)
-                </td>*@
+             
                     <td>
                         @Html.DisplayFor(modelItem => item.AccountName)
                     </td>
@@ -148,9 +113,7 @@
                     <td>
                         @item.NetAmount.ToString("N2")
                     </td>
-                    @* <td>
-                @Html.DisplayFor(modelItem => item.TaxCode)
-                </td>*@
+                
                     <td>
                         @item.TaxAmount.ToString("N2")
                     </td>
@@ -159,18 +122,8 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CurrencyCode)
-                    </td>
-                    @*  <td>
-                @Html.DisplayFor(modelItem => item.DateEntered)
-                </td>
-                <td>
-                @Html.DisplayFor(modelItem => item.EnteredBy)
-                </td>*@
-                    <td style="width:-moz-fit-content">
-                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
-                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> 
-                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
+                    </td>           
+                   
                 </tr>
             }
         </tbody>

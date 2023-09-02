@@ -141,10 +141,11 @@
 </div>
 <div class="accordion-button">
     <div class="col-md-6">
-        <a asp-page="./Edit" asp-route-id="@Model.Invoice?.Id">Edit</a>
+        <a asp-page="./Edit" asp-route-id="@Model.Invoice?.Id">Edit</a>  
     </div>
     <div class="col-md-6" style="text-align:right">
-        <a asp-page="./Index">Back to List</a>
+        <a asp-page="./InvoiceLine" asp-route-id="@Model.Invoice?.Id">Add New Line</a> ||
+        <a asp-page="./Index">Back to Invoice List</a>
     </div>
-    
+       
 </div>

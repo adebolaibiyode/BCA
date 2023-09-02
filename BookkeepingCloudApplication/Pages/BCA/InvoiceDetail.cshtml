@@ -1,0 +1,129 @@
+﻿@page
+@model BookkeepingCloudApplication.Pages.BCA.InvoiceDetailModel
+
+@{
+    ViewData["Title"] = "InvoiceDetail";
+}
+
+<h1>Invoice</h1>
+
+<div>
+   
+    <hr />
+    <h2 style="color:blueviolet">Invoice Header</h2>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.InvoiceType) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.InvoiceType)             
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.InvoiceNumber) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.InvoiceNumber)             
+            </div>
+            <hr style="color:orangered" />
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.AccountType) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.AccountType)
+            </div>
+            <hr style="color:orangered" />
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.AccountName) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.AccountName)
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.AccountReference) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.AccountReference)
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.InvoiceDate) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.InvoiceDate)
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.InvoiceStatus) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.InvoiceStatus)
+            </div>
+            <hr style="color:orangered" />
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.InvoiceControlAccount) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.InvoiceControlAccount)               
+                <p style="display: inline;"> ||   </p>
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.InvoiceAccount) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.InvoiceAccount)
+                <p style="display: inline;"> ||   </p>
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.CurrencyCode) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.CurrencyCode)
+            </div>
+            <hr style="color:orangered" />
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Invoice.InvoiceHeader.AccountEmail) :   @Html.DisplayFor(model => model.Invoice.InvoiceHeader.AccountEmail)
+            </div>
+            <h1>Total Price: @Html.DisplayFor(model => model.Invoice.InvoiceHeader.CurrencyCode) @Model.GetTotalPrice().ToString("N2")</h1>
+        </div>
+    </div>
+
+    <hr />
+    <h2 style="color:blueviolet">Invoice Lines</h2>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>             
+                    <th style="color:orangered">                        
+                        Item
+                    </th>
+                    <th style="color:orangered">                      
+                        Description
+                    </th>
+                    <th style="color:orangered">                      
+                        Qty
+                    </th>
+                    <th style="color:orangered">                      
+                        UnitPrice
+                    </th>
+                    <th style="color:orangered">
+                      Net
+                    </th>
+                   <th style="color:orangered">
+                        Tax
+                    </th>
+                    <th style="color:orangered">
+                     Gross
+                    </th>                
+                    <th style="color:orangered"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Invoice.InvoiceLines)
+                {
+                    <tr style="color:blue">
+                       <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceItem)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPrice)
+                        </td>
+                        <td>
+                            @item.NetAmount.ToString("N2")
+                        </td>
+                        <td>
+                            @item.TaxAmount.ToString("N2")
+                        </td>
+                        <td>
+                            @item.GrossAmount.ToString("N2")
+                        </td>                    
+                        <td style="width:-moz-fit-content">
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+ 
+    </div>
+</div>
+<div>
+    <a asp-page="./InvoiceLine" asp-route-id="@Model.Invoice.InvoiceLines[0].Id">Add New Line</a> ||
+  <a asp-page="./Index">Back to List</a>
+</div>

@@ -56,7 +56,8 @@ namespace BookkeepingCloudApplication.Pages.BCA
 
             _invoiceManager.CreateInvoice(Invoice);
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/BCA/Details", new { id = Invoice.Id });
+
         }
     }
 }
