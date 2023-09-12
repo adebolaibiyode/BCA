@@ -9,6 +9,10 @@ namespace BookkeepingCloudApplication.Pages.BCA
     {
         private readonly IInvoiceManager _invoiceManager;
 
+        /// <summary>
+        /// Constructor for initializing the DeleteModel class with dependencies.
+        /// </summary>
+        /// <param name="invoiceManager">The invoice manager instance.</param>
         public DeleteModel(IInvoiceManager invoiceManager)
         {
             _invoiceManager = invoiceManager;
@@ -17,6 +21,11 @@ namespace BookkeepingCloudApplication.Pages.BCA
         [BindProperty]
       public Invoice Invoice { get; set; } = default!;
 
+        /// <summary>
+        /// Handles the HTTP GET request for displaying an invoice to delete.
+        /// </summary>
+        /// <param name="id">Optional ID parameter for specifying the invoice to delete.</param>
+        /// <returns>An IActionResult representing the result of the operation.</returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _invoiceManager.GetIsInvoicesNull())
@@ -37,6 +46,11 @@ namespace BookkeepingCloudApplication.Pages.BCA
             return Page();
         }
 
+        /// <summary>
+        /// Handles the HTTP POST request for deleting an invoice asynchronously.
+        /// </summary>
+        /// <param name="id">Optional ID parameter for specifying the invoice to delete.</param>
+        /// <returns>An IActionResult representing the result of the operation.</returns>
         public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (id == null || _invoiceManager.GetIsInvoicesNull())

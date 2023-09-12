@@ -12,8 +12,13 @@ namespace BookkeepingCloudApplication.Pages.BCA
         private readonly IInvoiceManager _invoiceManager;
         private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-       
 
+        /// <summary>
+        /// Constructor for initializing the CreateModel class with dependencies.
+        /// </summary>
+        /// <param name="invoiceManager">The invoice manager instance.</param>
+        /// <param name="userManager">The user manager instance.</param>
+        /// <param name="httpContextAccessor">The HTTP context accessor instance.</param>
         public CreateModel(
             IInvoiceManager invoiceManager,
             Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
@@ -24,6 +29,10 @@ namespace BookkeepingCloudApplication.Pages.BCA
             _httpContextAccessor = httpContextAccessor;
         }
 
+        /// <summary>
+        /// Handles the HTTP GET request for creating a new invoice asynchronously.
+        /// </summary>
+        /// <returns>An IActionResult representing the result of the operation.</returns>
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
@@ -44,9 +53,11 @@ namespace BookkeepingCloudApplication.Pages.BCA
 
         [BindProperty]
         public Invoice Invoice { get; set; } = default!;
-        
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        /// <summary>
+        /// Handles the HTTP POST request for creating a new invoice asynchronously.
+        /// </summary>
+        /// <returns>An IActionResult representing the result of the operation.</returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid || _invoiceManager.GetIsInvoicesNull() || Invoice == null)

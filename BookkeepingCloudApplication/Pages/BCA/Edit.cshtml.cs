@@ -10,6 +10,10 @@ namespace BookkeepingCloudApplication.Pages.BCA
     {
         private readonly IInvoiceManager _invoiceManager;
 
+        /// <summary>
+        /// Constructor for initializing the EditModel class with dependencies.
+        /// </summary>
+        /// <param name="invoiceManager">The invoice manager instance.</param>
         public EditModel(IInvoiceManager invoiceManager)
         {
             _invoiceManager = invoiceManager;
@@ -18,6 +22,11 @@ namespace BookkeepingCloudApplication.Pages.BCA
         [BindProperty]
         public Invoice Invoice { get; set; } = default!;
 
+        /// <summary>
+        /// Handles the HTTP GET request for editing an invoice asynchronously.
+        /// </summary>
+        /// <param name="id">Optional ID parameter for specifying the invoice to edit.</param>
+        /// <returns>An IActionResult representing the result of the operation.</returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _invoiceManager.GetIsInvoicesNull())
@@ -34,8 +43,10 @@ namespace BookkeepingCloudApplication.Pages.BCA
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
+        /// <summary>
+        /// Handles the HTTP POST request for updating an invoice asynchronously.
+        /// </summary>
+        /// <returns>An IActionResult representing the result of the operation.</returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
