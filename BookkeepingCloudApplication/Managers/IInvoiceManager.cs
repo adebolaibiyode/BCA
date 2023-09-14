@@ -63,6 +63,6 @@ namespace BookkeepingCloudApplication.Managers
         /// Retrieves all invoices.
         /// </summary>
         /// <returns>List containing invoices on the specified page.</returns>
-        IList<Invoice> GetInvoices(uint count, uint page);
+        IList<Invoice> GetInvoices(uint count, uint page,string username="");
     }
 }

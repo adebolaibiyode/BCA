@@ -63,10 +63,17 @@ namespace BookkeepingCloudApplication.Managers
 
         /// <inheritdoc/>
 
-        //Get invoice updated to order by invoice number
-        public IList<Invoice> GetInvoices(uint count, uint page)
+        //Retrieves all invoices
+        public IList<Invoice> GetInvoices(uint count, uint page,string username="")
         {
-            return _context.Invoices.OrderBy(i => i.InvoiceNumber).Skip((int)(page * count)).Take((int)count).ToList();
+            if (username != "")
+            {
+                return _context.Invoices.Where(i => i.EnteredBy == username).OrderBy(i => i.InvoiceNumber).Skip((int)(page * count)).Take((int)count).ToList();
+            }
+            else
+            {
+                return _context.Invoices.OrderBy(i => i.InvoiceNumber).Skip((int)(page * count)).Take((int)count).ToList();
+            }
         }
 
         public InvoiceModel GetInvoiceByInvoiceNumber(int invoicenumber)
